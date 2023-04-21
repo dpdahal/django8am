@@ -1,0 +1,45 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+
+
+    <!-- Category News Start-->
+
+
+    <div class="container">
+        <div class="row">
+            {% for category in categoryData %}
+                {% if category.news_set.all.count > 0 %}
+                <div class="col-md-12 mt-5">
+                    <h1><a href="">{{ category.name }}</a></h1>
+                    <div class="row">
+                        {% for news in category.news_set.all %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    {% if news.photo %}
+                                    <img src="{{ news.photo.url }}" class="card-img-top" height="200" alt="...">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="">{{ news.title }}</a>
+                                        </h5>
+                                        <p class="card-text">
+                                            {{ news.summary|safe }}
+                                        </p>
+                                        <a href="{% url 'news_details' news.slug %}" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+

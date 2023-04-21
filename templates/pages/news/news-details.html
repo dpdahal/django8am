@@ -1,0 +1,34 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}    <!-- Category News Start-->
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h1><a href="">{{ newsData.title }}</a></h1>
+                {% if newsData.photo %}
+                    <img src="{{ newsData.photo.url }}" class="img-fluid" alt="">
+                {% endif %}
+
+                <p>{{ newsData.description }}</p>
+
+            </div>
+            <div class="col-md-4">
+                <h1>Related News</h1>
+                <ul>
+                    {% for rNews in related_news %}
+                        <li><a href="{% url 'news_details' rNews.slug %}">{{ rNews.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div id="fb-root"></div>
+            <div class="fb-comments" data-href="http://127.0.0.1:8000/news-details/{{ newsData.slug }}" data-width="100"
+                 data-numposts="10"></div>
+        </div>
+
+    </div>
+{% endblock %}
+

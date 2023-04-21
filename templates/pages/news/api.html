@@ -1,0 +1,35 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}    <!-- Category News Start-->
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><a href="">News List </a></h1>
+            </div>
+            <div class="row">
+                {% for cNews in newsData %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            {% if cNews.urlToImage %}
+                                <img src="{{ cNews.urlToImage }}" class="img-fluid card-img-top" height="200" alt="...">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="">{{ cNews.title }}</a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ cNews.summary|truncatechars:100 }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+

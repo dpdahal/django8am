@@ -1,0 +1,64 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}    <!-- Category News Start-->
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><a href="">News List </a></h1>
+            </div>
+            <div class="row">
+                {% for cNews in newsData %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            {% if cNews.photo %}
+                                <img src="{{ cNews.photo.url }}" class="img-fluid card-img-top" height="200" alt="...">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="">{{ cNews.title }}</a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ cNews.summary|truncatechars:100 }}
+                                </p>
+                                <a href="{% url 'news_details' cNews.slug %}" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row mt-5 mb-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if newsData.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page={{ newsData.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for i in newsData.paginator.page_range %}
+                            {% if newsData.number == i %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if newsData.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ newsData.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

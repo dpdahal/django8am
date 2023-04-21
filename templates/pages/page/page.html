@@ -1,0 +1,23 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}    <!-- Category News Start-->
+    <div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ pageContent.title }}</h1>
+
+            <p>
+                {{ pageContent.content|safe }}
+            </p>
+
+        </div>
+        <div class="col-md-4">
+            {% if pageContent.image %}
+                <img src="{{ pageContent.image.url }}" class="img-fluid" alt="">
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
